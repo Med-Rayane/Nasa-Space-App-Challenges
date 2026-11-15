@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --void: #05060a;
+  --bone: #f2efe8;
+  --gold: #d9aa63;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  background: var(--void);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  background-color: var(--void);
+  background-image:
+    radial-gradient(ellipse 90% 65% at 72% 28%, rgba(18, 24, 44, 0.9) 0%, transparent 62%),
+    radial-gradient(ellipse 70% 55% at 15% 85%, rgba(28, 22, 14, 0.75) 0%, transparent 66%),
+    radial-gradient(ellipse 45% 40% at 50% 50%, rgba(12, 14, 22, 0.6) 0%, transparent 70%);
+  color: var(--bone);
+  font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(217, 170, 99, 0.9);
+  color: var(--void);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #05060a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(242, 239, 232, 0.18);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(217, 170, 99, 0.5);
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+/* Analog grain laid over the 3D scene.
+   No blend mode: a blended full-screen layer forces the compositor to
+   re-blend the whole page on every scroll frame. */
+.grain-overlay {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  opacity: 0.08;
+}
+
+/* Technical grid used by the quiz panel */
+.tech-grid {
+  background-image:
+    linear-gradient(rgba(242, 239, 232, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(242, 239, 232, 0.045) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+@keyframes cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  55% {
+    transform: translateY(220%);
+  }
+  100% {
+    transform: translateY(220%);
+  }
+}
+
+.animate-cue {
+  animation: cue 2.6s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes quiz-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-quiz-in {
+  animation: quiz-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-cue,
+  .animate-quiz-in {
+    animation: none;
+  }
+}
